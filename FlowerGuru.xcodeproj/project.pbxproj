@@ -57,8 +57,8 @@
 				7B51CDE622B7E6E200FB1C21 /* AppDelegate.swift */,
 				7B51CDE822B7E6E200FB1C21 /* ViewController.swift */,
 				7B51CDEA22B7E6E200FB1C21 /* Main.storyboard */,
-				7B51CDED22B7E6E300FB1C21 /* Assets.xcassets */,
 				7B51CDEF22B7E6E300FB1C21 /* LaunchScreen.storyboard */,
+				7B51CDED22B7E6E300FB1C21 /* Assets.xcassets */,
 				7B51CDF222B7E6E300FB1C21 /* Info.plist */,
 			);
 			path = FlowerGuru;
