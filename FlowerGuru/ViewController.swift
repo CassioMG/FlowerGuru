@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreML
+import Vision
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -53,13 +55,43 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+        if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
+            let cIImage = CIImage(image: userPickedImage) {
+            
             imageView.image = userPickedImage
+            
+            detect(flowerImage: cIImage)
         }
         
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
+    private func detect(flowerImage: CIImage) {
+        
+        guard let model = try? VNCoreMLModel(for: FlowerClassifier().model) else {
+            fatalError("Couldn't load VNCoreMLModel using FlowerClassifier")
+        }
+        
+        let request = VNCoreMLRequest(model: model) { (vnRequest, error) in
+            
+            guard let results = vnRequest.results as? [VNClassificationObservation] else {
+                fatalError("Failed to get results from VNCoreMLRequest as [VNClassificationObservation]")
+            }
+            
+            print("\nAll Identifiers: \(results.map{ $0.identifier })\n")
+
+            if let identifier = results.first?.identifier {
+                self.navigationItem.title = "This is a \(identifier.capitalized) flower!"
+            }
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: flowerImage)
+        
+        do{
+            try handler.perform([request])
+        } catch {
+            print("Error trying to perform VNCoreMLRequest: \(error)")
+        }
+    }
 }
 
