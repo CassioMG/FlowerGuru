@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1140ED51BD6D93F8F8D2821C /* Pods_FlowerGuru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99AA2087E39555DAB76615DC /* Pods_FlowerGuru.framework */; };
+		7B00E2FD22B95FAE007FCD5E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 7B00E2FC22B95FAE007FCD5E /* Podfile */; };
 		7B51CDE722B7E6E200FB1C21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B51CDE622B7E6E200FB1C21 /* AppDelegate.swift */; };
 		7B51CDE922B7E6E200FB1C21 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B51CDE822B7E6E200FB1C21 /* ViewController.swift */; };
 		7B51CDEC22B7E6E200FB1C21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B51CDEA22B7E6E200FB1C21 /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		361972468CE9FE1C7C12356B /* Pods-FlowerGuru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlowerGuru.debug.xcconfig"; path = "Target Support Files/Pods-FlowerGuru/Pods-FlowerGuru.debug.xcconfig"; sourceTree = "<group>"; };
+		7B00E2FC22B95FAE007FCD5E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		7B51CDE322B7E6E200FB1C21 /* FlowerGuru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlowerGuru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B51CDE622B7E6E200FB1C21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B51CDE822B7E6E200FB1C21 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +26,8 @@
 		7B51CDED22B7E6E300FB1C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B51CDF022B7E6E300FB1C21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B51CDF222B7E6E300FB1C21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99AA2087E39555DAB76615DC /* Pods_FlowerGuru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlowerGuru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C521EDFE9688A2D6C67FE16B /* Pods-FlowerGuru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlowerGuru.release.xcconfig"; path = "Target Support Files/Pods-FlowerGuru/Pods-FlowerGuru.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1140ED51BD6D93F8F8D2821C /* Pods_FlowerGuru.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1767C68B1D03756AB15D3615 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				361972468CE9FE1C7C12356B /* Pods-FlowerGuru.debug.xcconfig */,
+				C521EDFE9688A2D6C67FE16B /* Pods-FlowerGuru.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		7B51CDDA22B7E6E200FB1C21 = {
 			isa = PBXGroup;
 			children = (
 				7B51CDE522B7E6E200FB1C21 /* FlowerGuru */,
+				7B00E2FC22B95FAE007FCD5E /* Podfile */,
 				7B51CDE422B7E6E200FB1C21 /* Products */,
+				1767C68B1D03756AB15D3615 /* Pods */,
+				BF15384B11D40B6BB37F0A0B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +83,14 @@
 			path = FlowerGuru;
 			sourceTree = "<group>";
 		};
+		BF15384B11D40B6BB37F0A0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				99AA2087E39555DAB76615DC /* Pods_FlowerGuru.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +98,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B51CDF522B7E6E300FB1C21 /* Build configuration list for PBXNativeTarget "FlowerGuru" */;
 			buildPhases = (
+				5BE17F65900EDB990954EA32 /* [CP] Check Pods Manifest.lock */,
 				7B51CDDF22B7E6E200FB1C21 /* Sources */,
 				7B51CDE022B7E6E200FB1C21 /* Frameworks */,
 				7B51CDE122B7E6E200FB1C21 /* Resources */,
+				59B4A53EC68E41F8887A0F9B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,11 +153,61 @@
 			files = (
 				7B51CDF122B7E6E300FB1C21 /* LaunchScreen.storyboard in Resources */,
 				7B51CDEE22B7E6E300FB1C21 /* Assets.xcassets in Resources */,
+				7B00E2FD22B95FAE007FCD5E /* Podfile in Resources */,
 				7B51CDEC22B7E6E200FB1C21 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		59B4A53EC68E41F8887A0F9B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FlowerGuru/Pods-FlowerGuru-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FlowerGuru/Pods-FlowerGuru-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5BE17F65900EDB990954EA32 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FlowerGuru-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7B51CDDF22B7E6E200FB1C21 /* Sources */ = {
@@ -280,6 +359,7 @@
 		};
 		7B51CDF622B7E6E300FB1C21 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 361972468CE9FE1C7C12356B /* Pods-FlowerGuru.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -298,6 +378,7 @@
 		};
 		7B51CDF722B7E6E300FB1C21 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C521EDFE9688A2D6C67FE16B /* Pods-FlowerGuru.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -1,0 +1,6 @@
+framework module Pods_FlowerGuru {
+  umbrella header "Pods-FlowerGuru-umbrella.h"
+
+  export *
+  module * { export * }
+}
