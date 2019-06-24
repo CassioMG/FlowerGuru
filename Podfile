@@ -9,5 +9,6 @@ target 'FlowerGuru' do
     pod 'Alamofire'
     pod 'SwiftyJSON'
     pod 'SVProgressHUD'
+    pod 'SDWebImage'
 
 end
