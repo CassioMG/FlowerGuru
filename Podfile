@@ -8,5 +8,6 @@ target 'FlowerGuru' do
   # Pods for FlowerGuru
     pod 'Alamofire'
     pod 'SwiftyJSON'
+    pod 'SVProgressHUD'
 
 end
