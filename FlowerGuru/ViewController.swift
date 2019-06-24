@@ -9,6 +9,9 @@
 import UIKit
 import CoreML
 import Vision
+import Alamofire
+import SwiftyJSON
+import SVProgressHUD
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -17,12 +20,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var extractTextLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
+        
+        extractTextLabel.text = ""
     }
     
     @IBAction func searchTapped(_ sender: UIBarButtonItem) {
@@ -59,6 +65,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             let cIImage = CIImage(image: userPickedImage) {
             
             imageView.image = userPickedImage
+            extractTextLabel.text = ""
             
             detect(flowerImage: cIImage)
         }
@@ -67,6 +74,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     private func detect(flowerImage: CIImage) {
+        
+        DispatchQueue.main.async { SVProgressHUD.show() }
         
         guard let model = try? VNCoreMLModel(for: FlowerClassifier().model) else {
             fatalError("Couldn't load VNCoreMLModel using FlowerClassifier")
@@ -81,7 +90,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             print("\nAll Identifiers: \(results.map{ $0.identifier })\n")
 
             if let identifier = results.first?.identifier {
+                
                 self.navigationItem.title = "This is a \(identifier.capitalized) flower!"
+                
+                self.requestWikiData(forFlower: identifier)
+                
+            } else {
+                DispatchQueue.main.async { SVProgressHUD.dismiss() }
             }
         }
         
@@ -91,7 +106,57 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             try handler.perform([request])
         } catch {
             print("Error trying to perform VNCoreMLRequest: \(error)")
+            DispatchQueue.main.async { SVProgressHUD.dismiss() }
         }
     }
+    
+    private func requestWikiData(forFlower flower: String) {
+        
+        let wikipediaURl = "https://en.wikipedia.org/w/api.php"
+        
+        let parameters : [String:String] = [
+            "format" : "json",
+            "action" : "query",
+            "prop" : "extracts",
+            "exintro" : "",
+            "explaintext" : "",
+            "titles" : flower,
+            "indexpageids" : "",
+            "redirects" : "1",
+        ]
+        
+        request(wikipediaURl, method: .get, parameters: parameters).responseJSON { (response) in
+            
+            // print("RESPONSE: ", response)
+            
+            if response.result.isSuccess {
+             
+                if let responseValue = response.result.value {
+                    
+                    let json = JSON(responseValue)
+                    
+                    if let pageId = json["query"]["pageids"][0].string {
+                        
+                        let extractText = json["query"]["pages"][pageId]["extract"]
+                        
+                        self.extractTextLabel.text = extractText.string
+                        
+                        print("THIS IS THE EXTRACT: ", extractText)
+                    }
+                }
+                
+            } else {
+                print("ERROR GETTING FLOWER DATA FROM WIKIPEDIA: ", response)
+                self.extractTextLabel.text = "Couldn't get flower info from Wikipedia."
+            }
+            
+            self.extractTextLabel.sizeToFit()
+            
+            DispatchQueue.main.async { SVProgressHUD.dismiss() }
+        }
+    }
+    
+    
 }
+
 
