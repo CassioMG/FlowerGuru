@@ -12,6 +12,7 @@ import Vision
 import Alamofire
 import SwiftyJSON
 import SVProgressHUD
+import SDWebImage
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -27,8 +28,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        
-        extractTextLabel.text = ""
     }
     
     @IBAction func searchTapped(_ sender: UIBarButtonItem) {
@@ -61,12 +60,10 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
+        extractTextLabel.text = ""
+        
         if let userPickedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage,
             let cIImage = CIImage(image: userPickedImage) {
-            
-            imageView.image = userPickedImage
-            extractTextLabel.text = ""
-            
             detect(flowerImage: cIImage)
         }
         
@@ -117,12 +114,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let parameters : [String:String] = [
             "format" : "json",
             "action" : "query",
-            "prop" : "extracts",
+            "prop" : "extracts|pageimages",
             "exintro" : "",
             "explaintext" : "",
             "titles" : flower,
             "indexpageids" : "",
             "redirects" : "1",
+            "pithumbsize" : "500"
         ]
         
         request(wikipediaURl, method: .get, parameters: parameters).responseJSON { (response) in
@@ -141,12 +139,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
                         
                         self.extractTextLabel.text = extractText.string
                         
-                        print("THIS IS THE EXTRACT: ", extractText)
+                        if let imageURL = json["query"]["pages"][pageId]["thumbnail"]["source"].string {
+                            self.imageView.sd_setImage(with: URL(string: imageURL))
+                        }
                     }
                 }
                 
             } else {
-                print("ERROR GETTING FLOWER DATA FROM WIKIPEDIA: ", response)
+                print("Error fetching flower info from Wikipedia: ", response)
                 self.extractTextLabel.text = "Couldn't get flower info from Wikipedia."
             }
             
